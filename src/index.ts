@@ -76,6 +76,10 @@ export class LedgerConnectConnector extends AbstractConnector {
 
   public async activate(): Promise<ConnectorUpdate> {
     if (!window.ethereum) {
+      const LedgerConnectUiKit = await import('@ledgerhq/ledgerconnect-ui-kit').then(m => m?.default ?? m)
+      const ledgerConnectUiKit = new LedgerConnectUiKit()
+      ledgerConnectUiKit.showInstallModal()
+
       throw new NoEthereumProviderError()
     }
 
@@ -83,6 +87,7 @@ export class LedgerConnectConnector extends AbstractConnector {
       console.log('Ledger Connect extension not found')
       throw new NotLedgerConnectProviderError()
     }
+
     console.log('Ledger Connect extension is installed and enabled')
 
     if (window.ethereum.on) {
