@@ -80,10 +80,8 @@ export class LedgerConnectConnector extends AbstractConnector {
     }
 
     if (!window.ethereum?.isLedgerConnect) {
-      console.log('Ledger Connect extension not found')
       throw new NotLedgerConnectProviderError()
     }
-    console.log('Ledger Connect extension is installed and enabled')
 
     if (window.ethereum.on) {
       window.ethereum.on('chainChanged', this.handleChainChanged)
@@ -92,10 +90,9 @@ export class LedgerConnectConnector extends AbstractConnector {
       window.ethereum.on('networkChanged', this.handleNetworkChanged)
     }
 
-    // TODO
-    if ((window.ethereum as any).isMetaMask) {
-      ;(window.ethereum as any).autoRefreshOnNetworkChange = false
-    }
+    // if ((window.ethereum as any).isMetaMask) {
+    //   ;(window.ethereum as any).autoRefreshOnNetworkChange = false
+    // }
 
     // try to activate + get account via eth_requestAccounts
     let account

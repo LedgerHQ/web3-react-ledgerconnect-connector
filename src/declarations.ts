@@ -6,7 +6,6 @@ interface Ethereum {
 }
 
 declare interface Window {
-  // ethereum?: Ethereum
   ethereum?: Ethereum & { isLedgerConnect: boolean }
 }
 
